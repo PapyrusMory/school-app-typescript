@@ -18,8 +18,7 @@ const MONGODB_URI = process.env.MONGODB_URI
 
 mongoose
   .connect(
-    MONGODB_URI ||
-      'mongodb+srv://mory:mory@cluster0.awiwu.mongodb.net/mernproject?retryWrites=true&w=majority'
+    MONGODB_URI
   )
   .then(() => {
     console.log('connected to mongodb')
