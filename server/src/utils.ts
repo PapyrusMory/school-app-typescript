@@ -11,7 +11,7 @@ export const generateToken = (user: User) => {
       isAdmin: user.isAdmin,
       isEducator: user.isEducator,
     },
-    process.env.JWT_SECRET || 'erkfldjfmlnvjfnvldvùroeinlsfkùùgtnz',
+    process.env.JWT_SECRET ,
     {
       expiresIn: '30d',
     }
@@ -24,7 +24,7 @@ export const isAuth = (req: Request, res: Response, next: NextFunction) => {
     const token = authorization.slice(7, authorization.length)
     const decode = jwt.verify(
       token,
-      process.env.JWT_SECRET || 'erkfldjfmlnvjfnvldvùroeinlsfkùùgtnz'
+      process.env.JWT_SECRET
     )
     req.user = decode as {
       _id: string
