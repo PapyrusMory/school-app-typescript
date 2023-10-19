@@ -7,7 +7,7 @@ export const bilanRouter = express.Router()
 
 bilanRouter.post(
   '/new',
-  isAuth,
+  //isAuth,
   expressAsyncHandler(async (req: Request, res: Response) => {
     try {
       const newClass = new BilanModel(req.body)
@@ -306,7 +306,7 @@ bilanRouter.get(
 bilanRouter.get(
   '/yearly-bilan',
   expressAsyncHandler(async (req: Request, res: Response) => {
-    const y = 0
+    const y = 2023
     const firstDay = new Date(y, 0, 1)
     const lastDay = new Date(y, 12, 0)
     try {
@@ -335,7 +335,7 @@ bilanRouter.get(
 bilanRouter.get(
   '/plot-bilans',
   expressAsyncHandler(async (req: Request, res: Response) => {
-    const date = new Date(0),
+    const date = new Date(),
       y = date.getFullYear(),
       m = date.getMonth()
     const firstDay = new Date(y, m, 1)

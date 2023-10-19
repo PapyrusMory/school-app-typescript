@@ -2,9 +2,45 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom'
+import ProtectedRoute from './components/ProtectedRoute.tsx'
+import AdminRoute from './components/AdminRoute.tsx'
+import { Homepage, Login } from './pages/index.ts'
+import { MemoizedStoreProvider } from './redux/Store.tsx'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path='/login' element={<Login />} />
+      <Route path='/' element={<App />}>
+        <Route index={true} path='/' element={<Homepage />} />
+
+        {/**Norma Users */}
+        <Route path='' element={<ProtectedRoute />}></Route>
+
+        {/**Admin Users */}
+        <Route path='/admin' element={<AdminRoute />}></Route>
+      </Route>
+    </>
+  )
+)
+
+const queryClient = new QueryClient()
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <MemoizedStoreProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </MemoizedStoreProvider>
+  </React.StrictMode>
 )

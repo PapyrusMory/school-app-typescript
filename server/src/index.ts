@@ -7,6 +7,8 @@ import { userRouter } from './routers/userRouter'
 import { yearRouter } from './routers/yearRouter'
 import { classRouter } from './routers/classRouter'
 import { studentRouter } from './routers/studentRouter'
+import { bilanRouter } from './routers/bilanRouter'
+import { staffRouter } from './routers/staffRouter'
 
 dotenv.config()
 
@@ -15,7 +17,10 @@ mongoose.set('strictQuery', true)
 const MONGODB_URI = process.env.MONGODB_URI
 
 mongoose
-  .connect(MONGODB_URI)
+  .connect(
+    MONGODB_URI ||
+      'mongodb+srv://mory:mory@cluster0.awiwu.mongodb.net/mernproject?retryWrites=true&w=majority'
+  )
   .then(() => {
     console.log('connected to mongodb')
   })
@@ -39,11 +44,13 @@ app.use('/api/users', userRouter)
 app.use('/api/years', yearRouter)
 app.use('/api/classes', classRouter)
 app.use('/api/students', studentRouter)
+app.use('/api/bilans', bilanRouter)
+app.use('/api/staffs', staffRouter)
 
-app.use(express.static(path.join(__dirname, '../../client/dist')))
+/*app.use(express.static(path.join(__dirname, '../../client/dist')))
 app.get('*', (req: Request, res: Response) =>
   res.sendFile(path.join(__dirname, '../../client/dist/index.html'))
-)
+)*/
 
 const PORT: number = parseInt((process.env.PORT || '5000') as string, 10)
 

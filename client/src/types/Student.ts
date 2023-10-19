@@ -1,0 +1,37 @@
+export type Student = {
+  _id: string
+  name: string
+  birthPlace?: string
+  age?: string
+  sex?: string
+  city?: string
+  country?: string
+  tel?: string
+  nationality?: string
+  redoubl?: string
+  originEts?: string
+  previousClass?: string
+  nextClass?: string
+  dadName?: string
+  dadJob?: string
+  dadContact?: string
+  dadPlace?: string
+  momName?: string
+  momJob?: string
+  momContact?: string
+  momPlace?: string
+  aff?: boolean
+  matricule: string
+  mntAPayer?: number
+  remise?: number
+  inscription?: number
+  versement1?: number
+  versement2?: number
+  versement3?: number
+  versement4?: number
+  versement5?: number
+  versement6?: number
+  image?: string
+  incurred_on?: Date
+  classs?: string
+}

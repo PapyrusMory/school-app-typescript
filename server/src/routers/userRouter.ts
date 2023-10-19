@@ -13,7 +13,10 @@ userRouter.post(
   expressAsyncHandler(async (req: Request, res: Response) => {
     try {
       const newUser = new UserModel({
-        ...req.body,
+        email: req.body.email,
+        name: req.body.name,
+        isAdmin: req.body.isAdmin,
+        isEducator: req.body.isEducator,
         password: bcrypt.hashSync(req.body.password),
       })
 
